@@ -4,3 +4,8 @@ export type Iuser = {
     password: string,
     confirmPassword: string
 }
+
+export type IloginUser = {
+    email: string,
+    password: string,
+}
