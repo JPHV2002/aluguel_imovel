@@ -1,4 +1,4 @@
-import { MongoUserRepository } from "../../repositories/implementations/MongoUserRepository";
+import { MongoUserRepository } from "../../../repositories/implementations/User/MongoUserRepository";
 import { CreateUserController } from "./CreateUserController";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
