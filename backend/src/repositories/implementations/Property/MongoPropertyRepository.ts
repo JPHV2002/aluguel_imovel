@@ -8,6 +8,6 @@ export class MongoPropertyRepository implements IPropertyRepository {
     propertyMongo.save();
   }
   async getPropertyById(id: string): Promise<Property> {
-    return PropertyMongo.findOne({ id: id });
+    return PropertyMongo.findOne({ _id: id });
   }
 }
