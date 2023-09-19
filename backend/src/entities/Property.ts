@@ -17,8 +17,10 @@ export class Property {
 
   constructor(props: Omit<Property, "id">, id?: string) {
     Object.assign(this, props);
-    if (id) {
-      this.id = uuid;
+    if (!id) {
+      this.id = uuid();
+    } else {
+      this.id = id;
     }
   }
 }
