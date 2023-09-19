@@ -8,6 +8,9 @@ export class MongoPropertyRepository implements IPropertyRepository {
     propertyMongo.save();
   }
   async getPropertyById(id: string): Promise<Property> {
-    return PropertyMongo.findOne({ _id: id });
+    return await PropertyMongo.findOne({ _id: id });
+  }
+  async getAllProperty(): Promise<Property[]> {
+    return await PropertyMongo.find();
   }
 }
