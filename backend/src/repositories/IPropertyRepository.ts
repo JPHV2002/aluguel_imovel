@@ -5,4 +5,5 @@ export interface IPropertyRepository {
   getPropertyById(id: string): Promise<Property>;
   getAllProperty(): Promise<Property[]>;
   editProperty(property: Property): Promise<void>;
+  deleteProperty(id: string): Promise<void>;
 }

@@ -14,13 +14,14 @@ export class MongoPropertyRepository implements IPropertyRepository {
     return await PropertyMongo.find();
   }
   async editProperty(property: Property): Promise<void> {
-    console.log(property.id);
-    console.log(property);
     await PropertyMongo.updateOne(
       { id: property.id },
       {
         $set: property,
       }
     );
+  }
+  async deleteProperty(id: string): Promise<void> {
+    await PropertyMongo.deleteOne({ id: id });
   }
 }

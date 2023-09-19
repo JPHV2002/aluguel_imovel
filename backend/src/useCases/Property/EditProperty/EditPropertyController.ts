@@ -3,7 +3,7 @@ import { EditPropertyUseCase } from "./EditPropertyUseCase";
 
 export class EditPropertyController {
   constructor(private editPropertyUseCase: EditPropertyUseCase) {}
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const { name, ownerId, bedrooms, bathrooms, city, state, country } =
       request.body;
@@ -20,7 +20,9 @@ export class EditPropertyController {
       );
       return response.status(201).json();
     } catch (error) {
-      return response.status(400).json({ message: error });
+      return response
+        .status(400)
+        .json({ message: error.message || "Internal error" });
     }
   }
 }

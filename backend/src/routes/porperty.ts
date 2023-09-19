@@ -3,6 +3,7 @@ import { createPropertyController } from "../useCases/Property/CreateProperty";
 import { getProeprtyController } from "../useCases/Property/GetProperty";
 import { getAllPropertyController } from "../useCases/Property/GetAllProperty";
 import { editPropertyController } from "../useCases/Property/EditProperty";
+import { deletePropertyController } from "../useCases/Property/DeleteProperty";
 
 const propertyApi = Router();
 
@@ -17,6 +18,9 @@ propertyApi.post("/", (req, res) => {
 });
 propertyApi.put("/:id", (req, res) => {
   editPropertyController.handle(req, res);
+});
+propertyApi.delete("/:id", (req, res) => {
+  deletePropertyController.handle(req, res);
 });
 
 export { propertyApi };

@@ -16,7 +16,9 @@ export class CreatePropertyController {
       });
       return response.status(201).json();
     } catch (error) {
-      return response.status(400).json({ message: error });
+      return response
+        .status(400)
+        .json({ message: error.message || "Internal error" });
     }
   }
 }

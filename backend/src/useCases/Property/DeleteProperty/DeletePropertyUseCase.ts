@@ -1,16 +1,13 @@
-import { Property } from "../../../entities/Property";
 import { IPropertyRepository } from "../../../repositories/IPropertyRepository";
-import { IEditPropertyDTO } from "./EditPropertyDTO";
 
-export class EditPropertyUseCase {
+export class DeletePropertyUseCase {
   constructor(private propertyRepository: IPropertyRepository) {}
-  async execute(data: IEditPropertyDTO, id: string): Promise<void> {
+  async execute(id: string): Promise<void> {
     const propertyAlreadyExists = await this.propertyRepository.getPropertyById(
       id
     );
     if (propertyAlreadyExists) {
-      const property = new Property(data, id);
-      await this.propertyRepository.editProperty(property);
+      this.propertyRepository.deleteProperty(id);
       return;
     }
     throw new Error("Property does not exists");

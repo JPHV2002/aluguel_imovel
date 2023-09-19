@@ -9,7 +9,9 @@ export class GetAllPropertyController {
       const properties: Property[] = await this.getAllPropertyUseCase.execute();
       return response.status(200).json(properties);
     } catch (error) {
-      return response.status(400).json({ message: error });
+      return response
+        .status(400)
+        .json({ message: error.message || "Internal error" });
     }
   }
 }

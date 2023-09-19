@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { GetPropertyUseCase } from "./GetPropertyUseCase";
+import { DeletePropertyUseCase } from "./DeletePropertyUseCase";
 
-export class GetProeprtyController {
-  constructor(private getPropertyUseCase: GetPropertyUseCase) {}
+export class DeletePropertyController {
+  constructor(private deletePropertyUseCase: DeletePropertyUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     try {
-      const property = await this.getPropertyUseCase.execute(id);
-      return response.status(200).json(property);
+      await this.deletePropertyUseCase.execute(id);
+      return response.status(200).send();
     } catch (error) {
       return response
         .status(400)
