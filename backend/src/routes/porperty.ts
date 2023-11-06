@@ -4,8 +4,11 @@ import { getProeprtyController } from "../useCases/Property/GetProperty";
 import { getAllPropertyController } from "../useCases/Property/GetAllProperty";
 import { editPropertyController } from "../useCases/Property/EditProperty";
 import { deletePropertyController } from "../useCases/Property/DeleteProperty";
+import { authenticateJWT } from "../middleware/auth";
 
 const propertyApi = Router();
+
+propertyApi.use(authenticateJWT);
 
 propertyApi.get("/", (req, res) => {
   getAllPropertyController.handle(req, res);
