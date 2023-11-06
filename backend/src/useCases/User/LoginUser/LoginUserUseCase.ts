@@ -10,9 +10,13 @@ export class LoginUserUseCase {
     if (userData) {
       const match = await bcrypt.compare(data.password, userData.password);
       if (match) {
-        const token = jwt.sign({ email: data.email }, "your_secret_key", {
-          expiresIn: "1h",
-        });
+        const token = jwt.sign(
+          { email: data.email, id: userData.id },
+          "your_secret_key",
+          {
+            expiresIn: "1h",
+          }
+        );
         return token;
       }
     }

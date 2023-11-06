@@ -3,4 +3,5 @@ export interface ICreateRateRequestDTO {
   ownerId: string;
   rateNumber: number;
   propertyId: string;
+  userId: string;
 }
