@@ -3,9 +3,9 @@ import { CreatePropertyUseCase } from "./CreatePropertyUseCase";
 
 export class CreatePropertyController {
   constructor(private createPropertyUseCase: CreatePropertyUseCase) {}
-  async handle(request: Request, response: Response): Promise<Response> {
-    const { name, ownerId, bedrooms, bathrooms, city, state, country } =
-      request.body;
+  async handle(request: any, response: Response): Promise<Response> {
+    const { name, bedrooms, bathrooms, city, state, country } = request.body;
+    const ownerId = request.user.id;
     try {
       await this.createPropertyUseCase.execute({
         name,

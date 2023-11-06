@@ -12,9 +12,12 @@ export class CreateRateUseCase {
     const propertyData = await this.propertyRepository.getPropertyById(
       data.propertyId
     );
+    console.log(data.propertyId);
     if (propertyData.ownerId != data.userId) {
       const rate = new Rate(data);
       this.rateRepository.createRate(rate);
+      return;
     }
+    throw new Error("You canot rate your own property");
   }
 }

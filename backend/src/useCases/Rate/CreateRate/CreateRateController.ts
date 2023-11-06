@@ -4,11 +4,11 @@ import { CreateRateUseCase } from "./CreateRateUseCase";
 export class CreateRateController {
   constructor(private createRateUseCase: CreateRateUseCase) {}
   async handle(request: any, response: Response) {
-    const { ownerId, rateNumber, comment, propertyId } = request.body;
+    const { rateNumber, comment, propertyId } = request.body;
     const userId = request.user.id;
     try {
       await this.createRateUseCase.execute({
-        ownerId,
+        ownerId: userId,
         rateNumber,
         comment,
         propertyId,
