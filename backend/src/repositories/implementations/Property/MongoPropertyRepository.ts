@@ -7,8 +7,8 @@ export class MongoPropertyRepository implements IPropertyRepository {
     const propertyMongo = new PropertyMongo(property);
     propertyMongo.save();
   }
-  async getPropertyById(id: string): Promise<Property> {
-    return await PropertyMongo.findOne({ id: id });
+  async getPropertyById(id: string): Promise<Property[]> {
+    return await PropertyMongo.find({ ownerId: id });
   }
   async getAllProperty(): Promise<Property[]> {
     return await PropertyMongo.find();
