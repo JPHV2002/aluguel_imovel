@@ -17,7 +17,7 @@ export class CreateRenteController {
       return response.status(201).json();
     } catch (error) {
       return response
-        .status(400)
+        .status(204)
         .json({ message: error.message || "Internal error" });
     }
   }

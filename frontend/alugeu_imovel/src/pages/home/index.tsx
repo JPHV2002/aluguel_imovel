@@ -6,6 +6,7 @@ import Modal from "react-modal";
 
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
+import RentModal from "../../components/rentModal";
 
 export function HomePage() {
   const [property, setProperty] = useState([]);
@@ -30,7 +31,7 @@ export function HomePage() {
         <span>State: {property.address.state}</span>
         <span>Country: {property.address.country}</span>
       </p>
-      <button>Alugar</button>
+      <button onClick={() => openModalRent(property.id)}>Alugar</button>
       <button onClick={() => openModal(property.id)}>Avaliar</button>
     </div>
   );
@@ -108,9 +109,50 @@ export function HomePage() {
     navigate(`/perfil/${decoded.data.id}`);
   };
 
+  const [isModalOpenRent, setIsModalOpenRent] = useState(false);
+
+  const openModalRent = (propertyId) => {
+    setSelectedProperty(propertyId);
+    setIsModalOpenRent(true);
+  };
+
+  const closeModalRent = () => {
+    setSelectedProperty(null);
+    setIsModalOpenRent(false);
+  };
+
+  const handleSaveDateRangeRent = async (startDate, endDate) => {
+    const newDateStart = new Date(startDate).getTime();
+    const newDateEnd = new Date(endDate).getTime();
+    const token: string = Cookies.get("authToken") || "";
+    const response = await api.post(
+      "/rent",
+      {
+        propertyId: selectedProperty,
+        startDate: newDateStart,
+        endDate: newDateEnd,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    if (response.status != 201) {
+      console.log("Conflito de datas");
+    }
+  };
+
   return (
     <>
       <button onClick={handleMyPage}>Minha Pagina</button>
+
+      <RentModal
+        isOpen={isModalOpenRent}
+        onClose={closeModalRent}
+        onSave={handleSaveDateRangeRent}
+      />
+
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
