@@ -1,16 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LoginPage } from "./pages/login";
-import { HomePage } from "./pages/home";
-import { ProfilePage } from "./pages/profile";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { ChildrenProp } from "./types/tyopes";
+import { Login } from "./pages/Login";
 
-export function AppRoutes() {
+const TOKEN = localStorage.getItem("token");
+
+const PrivateRoute = ({ children }: ChildrenProp) => {
+  if (!TOKEN) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
+export const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/perfil/:id" element={<ProfilePage />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </Router>
   );
-}
+};
