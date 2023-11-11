@@ -7,7 +7,7 @@ export class LoginUserController {
     const { email, password } = request.body;
     try {
       const token = await this.loginUserUseCase.execute({ email, password });
-      response.status(200).send({ tokne: token });
+      response.status(200).send({ token: token });
     } catch (error) {
       return response.status(401).json({
         message: error.message || "Internal error",

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { ChildrenProp } from "./types/tyopes";
 import { Login } from "./pages/Login";
+import { Homepage } from "./pages/home";
 
 const TOKEN = localStorage.getItem("token");
 
@@ -21,6 +22,14 @@ export const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Homepage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
