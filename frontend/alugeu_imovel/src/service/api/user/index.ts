@@ -1,4 +1,4 @@
-import { ILoginResponse } from "../../../types/requests/user";
+import { IGetUser, ILoginResponse } from "../../../types/requests/user";
 import { api } from "../api";
 
 export async function userLogin(
@@ -27,4 +27,17 @@ export async function userLogin(
       token: "Error",
     };
   }
+}
+
+export async function getUserName(): Promise<IGetUser> {
+  const token = localStorage.getItem("token");
+  const response = await api.get("/user/", {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
+  return {
+    status: response.status,
+    user: response.data,
+  };
 }

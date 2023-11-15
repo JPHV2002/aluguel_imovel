@@ -14,7 +14,7 @@ export class LoginUserUseCase {
           { email: data.email, id: userData.id },
           "your_secret_key",
           {
-            expiresIn: "1h",
+            expiresIn: "2h",
           }
         );
         return token;
