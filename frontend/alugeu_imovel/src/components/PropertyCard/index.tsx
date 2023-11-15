@@ -26,6 +26,10 @@ export const PropertyCard = (props) => {
     console.log("Show Rate");
   };
 
+  const showRentSubmit = () => {
+    console.log("Show Rent");
+  };
+
   const excludeSubmit = () => {
     excludeProperty(property.id);
   };
@@ -47,7 +51,7 @@ export const PropertyCard = (props) => {
     ) : (
       <C.ButtonContainer>
         <C.Button onClick={showRateSubmit}>Mostrar Avaliacao</C.Button>
-        <C.Button onClick={excludeSubmit}>Mostrar Alugeu</C.Button>
+        <C.Button onClick={showRentSubmit}>Mostrar Alugel</C.Button>
         <C.Button onClick={excludeSubmit}>Excluir</C.Button>
       </C.ButtonContainer>
     );
